@@ -1,0 +1,38 @@
+<DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="bootstrap.min.css">
+ <script src="jquery.min.js"></script>
+ <script type="text/javascript" src="jquery.qrcode.min.js"></script>
+</head>
+
+<body>
+
+ <div class="jumbotron">
+  <h1>Create Document with QR codes</h1>
+ <div>
+
+ <div class="container-sm">
+  <label for="list">List TAG|IP/cidr:</label><br />
+  <textarea id="list" rows="4" cols="50">
+   tag|x.x.x.x/cidr
+  </textarea><br />
+  <button type='button' onclick="mkqr()">SUBMIT</button>
+ </div>
+
+ <script>
+  function mkqr(){
+   var list = document.getElementById("list").value;
+   	jQuery('#qrcodeCanvas').qrcode({
+                width: 96,
+                height: 96,
+		text	: list
+	});
+  }
+
+ </script>
+ <script src="bootstrap.min.js"></script>
+ <div id="qrcodeCanvas"></div>
+</body>
+</html>
+
