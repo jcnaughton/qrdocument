@@ -14,25 +14,41 @@
 
  <div class="container-sm">
   <label for="list">List TAG|IP/cidr:</label><br />
-  <textarea id="list" rows="4" cols="50">
+  <textarea id="text" rows="4" cols="50">
    tag|x.x.x.x/cidr
   </textarea><br />
   <button type='button' onclick="mkqr()">SUBMIT</button>
  </div>
+  <div id="table1"></div>
 
  <script>
   function mkqr(){
-   var list = document.getElementById("list").value;
-   	jQuery('#qrcodeCanvas').qrcode({
+   var text = document.getElementById("text").value;
+   var row = 1;
+   var list = text.split("\n");
+     var table1 = "<table class='table-sm'>";
+     for ( item of list ) {
+        table1 += "<tr><td>" + item + "</td><td id='row" + row + "'></td></tr>";
+        row++;
+     }
+     table1 += "</table>";
+     document.getElementById("table1").innerHTML = table1;
+
+     // draw the qr codes
+   var row = 1; 
+     for ( item of list ) {    
+        jQuery("#row" + row).qrcode({
                 width: 96,
                 height: 96,
-		text	: list
+		text	: item
 	});
+        row++;
+     }
   }
 
  </script>
  <script src="bootstrap.min.js"></script>
- <div id="qrcodeCanvas"></div>
+
 </body>
 </html>
 
